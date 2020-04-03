@@ -18,4 +18,6 @@ public interface PlanDao {
 	List<Plan> obtenerPlanesFiltrados(String intensidad, boolean aptoCeliaco, boolean aptoHipertenso, boolean sinCarne, boolean sinLacteos);
 
 	Plan generarPlanSugerido(PacienteDTO pacienteDTO);
+
+	List<Plan> getAllPlanes();
 }

@@ -29,6 +29,19 @@ public class PlanDaoImpl implements PlanDao {
 				.uniqueResult();
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Plan> getAllPlanes() {
+
+		final Session session = sessionFactory.getCurrentSession();
+		
+		List<Plan> resultado = (List<Plan>) session.createCriteria(Plan.class)
+		.list();
+		
+		return resultado;
+	}
+	
+	
 	@Override
 	public List<Plan> obtenerPlanesFiltrados(String intensidad, boolean aptoCeliaco, boolean aptoHipertenso, boolean sinCarne, boolean sinLacteos) {
 

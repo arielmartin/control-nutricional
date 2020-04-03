@@ -14,10 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import modelo.Paciente;
 import modelo.PacienteDTO;
+import modelo.Plan;
 import modelo.Usuario;
 import servicios.ServicioLogin;
 import servicios.ServicioPacientes;
-//import servicios.ServicioPlan;
+import servicios.ServicioPlan;
 
 @Controller
 public class ControladorLogin {
@@ -27,6 +28,9 @@ public class ControladorLogin {
 	
 	@Inject
 	private ServicioPacientes servicioPacientes;
+	
+	@Inject
+	private ServicioPlan servicioPlan;
 	
 	//@Inject
 	//private ServicioRegistrarPesoDiario servicioRegistrarPesoDiario;
@@ -167,6 +171,12 @@ public class ControladorLogin {
 		usuario.setRol("medico");
 		servicioLogin.crearUsuario(usuario);
 		
+		//metodo que agrega los Planes
+		List<Plan> planes = servicioPlan.getAllPlanes();
+		
+		if(planes.size() == 0){
+			servicioPacientes.insertarPlanesIniciales();
+		}
 		return new ModelAndView("redirect:/login");
 		
 	}
