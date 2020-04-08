@@ -22,6 +22,7 @@ import modelo.Plan;
 import modelo.Usuario;
 import servicios.ServicioLogin;
 import servicios.ServicioPacientes;
+import servicios.ServicioPlan;
 
 
 @Controller
@@ -31,7 +32,11 @@ public class ControladorPaciente {
 	private ServicioPacientes servicioPacientes;
 	
 	@Inject
+	private ServicioPlan servicioPlan;
+	
+	@Inject
 	private ServicioLogin servicioLogin;
+	
 	
 	@RequestMapping(path = "/paciente", method = RequestMethod.GET)
 	public ModelAndView paciente() {
@@ -45,8 +50,108 @@ public class ControladorPaciente {
 		return new ModelAndView("paciente_view", model);
 	}
 	
+	
+	@RequestMapping(path = "/selectPaciente", method = RequestMethod.POST)
+	public ModelAndView selectPaciente(@ModelAttribute("paciente") Paciente paciente, HttpServletRequest request) {
+		ModelMap model = new ModelMap();
+
+		paciente = servicioPacientes.obtenerPaciente(paciente.getId() );
+		Plan plan = servicioPlan.consultarPlan( paciente.getPlanAsociado_id() );
+		
+		PacienteDTO pacienteDTO = new PacienteDTO();
+		
+		pacienteDTO.setPaciente(paciente);
+		pacienteDTO.setPlan(plan);
+		
+		Double caloriasPGPorDia;
+		Double pesoAPerderOGanar;
+		Double peso = paciente.getPeso();
+		Double altura = paciente.getAltura();
+		String sexo = paciente.getSexo();
+		int edad = paciente.getEdad();
+		int ejercicio = paciente.getEjercicio();
+		
+		Formula formula = new Formula();
+		Double imc = formula.calcularIMC(peso, altura);
+		Double pesoIdeal = formula.calcularPesoIdeal(altura, sexo);
+		Double tmb = formula.calcularTMB(peso, altura, edad, sexo, ejercicio);
+		
+		if(peso > pesoIdeal){
+		pesoAPerderOGanar = peso - pesoIdeal;}
+		else{
+		pesoAPerderOGanar = pesoIdeal - peso;}
+		
+		if(tmb > pacienteDTO.getPlan().getCaloriasDiarias()) {
+		caloriasPGPorDia = tmb - pacienteDTO.getPlan().getCaloriasDiarias();}
+		else {
+		caloriasPGPorDia = pacienteDTO.getPlan().getCaloriasDiarias() - tmb;
+		}
+		
+		int diasObjetivo = (int)(((pesoAPerderOGanar * 1000) * 7) / caloriasPGPorDia);
+		
+		model.put("peso", peso);
+		model.put("tmb", tmb);
+		model.put("imc", imc);
+		model.put("pesoIdeal", pesoIdeal);
+		model.put("pesoAPerderOGanar", pesoAPerderOGanar);
+		model.put("caloriasPGPorDia", caloriasPGPorDia);
+		model.put("diasObjetivo", diasObjetivo);
+		
+		
+		model.put("paciente",paciente);
+		model.put("plan",plan);
+		model.put("pacienteDTO",pacienteDTO);
+
+		request.getSession().setAttribute("idUsuario", paciente.getIdUsuario() );
+		request.getSession().setAttribute("NOMBRE_PACIENTE", paciente.getNombre() );
+		
+		return new ModelAndView("detalle_view", model);
+	}
+	
+	
+	@RequestMapping(path = "/paciente", method = RequestMethod.POST)
+	public ModelAndView paciente(@ModelAttribute("usuario") Usuario usuario, HttpServletRequest request) {
+		
+		ModelMap model = new ModelMap();
+
+		if (usuario != null) {
+			
+			// invoca el metodo crearUsuario del servicio
+			if(servicioLogin.ckeckMailUsuarioar(usuario)){
+				
+				//model.put("usuario", usuario);
+				PacienteDTO pacienteDTO = new PacienteDTO();
+				pacienteDTO.setUsuario(usuario);
+				
+				//request.getSession().setAttribute("idUsuario", usuario.getId());
+				request.getSession().setAttribute("APELLIDO_PACIENTE", usuario.getApellido() );
+				request.getSession().setAttribute("NOMBRE_PACIENTE", usuario.getNombre() );
+				request.getSession().setAttribute("fnac", usuario.getFechaNacimiento() );
+				request.getSession().setAttribute("email", usuario.getEmail() );
+				request.getSession().setAttribute("pass", usuario.getPassword() );
+				
+				//pacienteDTO.setFnac( usuario.getFechaNacimiento() );
+				//pacienteDTO.setEdad( usuario.getFechaNacimiento() );
+
+				model.put("pacienteDTO", pacienteDTO);
+				return new ModelAndView("paciente_view", model);
+			}
+			else {
+				model.put("error", "El E-mail Ingresado ya esta Registrado. Por Favor ingrese otro E-mail");
+				return new ModelAndView("registrar_usuario_view", model);
+			}
+			
+		} else {
+			// si el usuario no existe agrega un mensaje de error en el modelo.
+			model.put("error", "Usuario o clave incorrecta");
+		}
+		return new ModelAndView("registrar_usuario_view", model);
+	}
+	
+	
 	@RequestMapping(path = "/exclusiones", method = RequestMethod.POST)
 	public ModelAndView exclusiones(@ModelAttribute("pacienteDTO") PacienteDTO pacienteDTO, HttpServletRequest request) {
+		
 		ModelMap model = new ModelMap();
 			
 		model.put("pacienteDTO", pacienteDTO);
@@ -124,6 +229,7 @@ public class ControladorPaciente {
 	
 	@RequestMapping(path = "/final", method = RequestMethod.POST)
 	public ModelAndView crearGraficoCalorias2(@ModelAttribute("pacienteDTO") PacienteDTO pacienteDTO, HttpServletRequest request) {
+		
 		ModelMap model = new ModelMap();
 		
 		// Aca completa con los datos del plan elegido, haciendo un llamado a la BD mediante el ID

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import modelo.CompararProgresoDTO;
 import modelo.Formula;
 import modelo.Paciente;
+import modelo.PacienteDTO;
 import modelo.Plan;
 import modelo.ProgresoPesoIdeal;
 import servicios.ServicioPacientes;
@@ -50,11 +51,13 @@ public class ControladorProgresoPaciente {
 	
 	@RequestMapping(path = "/progresoSeleccionarPaciente", method = RequestMethod.GET)
 	public ModelAndView progresoSeleccionarPaciente(HttpServletRequest request) {
+		
 		ModelMap model = new ModelMap();
 		
 		Paciente paciente = new Paciente();
 		model.put("paciente", paciente);
-		
+		PacienteDTO pacienteDTO = new PacienteDTO();
+		pacienteDTO.setPaciente(paciente);
 
 		// servicio para obtener listado de pacientes
 		List<Paciente> listadoPacientes = servicioPacientes.obtenerListadoPacientes();
@@ -65,6 +68,7 @@ public class ControladorProgresoPaciente {
 		}
 		
 		
+		model.put("pacienteDTO", pacienteDTO);
 		model.put("listadoPacientes", listadoPacientes);
 		
 		return new ModelAndView("progresoSeleccionarPaciente", model);
@@ -72,13 +76,13 @@ public class ControladorProgresoPaciente {
 	
 	
 	@RequestMapping(path = "/progresoPaciente", method = RequestMethod.POST)
-	public ModelAndView progresoPaciente(@ModelAttribute("paciente") Paciente pacienteSelect, HttpServletRequest request) {
+	public ModelAndView progresoPaciente(@ModelAttribute("pacienteDTO") PacienteDTO pacienteMock, HttpServletRequest request) {
 		ModelMap model = new ModelMap();
 		
 		//Long longId = idUsuario;
 		//int id = longId.intValue();
 				
-		Paciente paciente = servicioPacientes.obtenerPaciente(pacienteSelect.getId());
+		Paciente paciente = servicioPacientes.obtenerPaciente(pacienteMock.getPaciente().getId() );
 		
 		if(paciente == null) {
 			
@@ -111,10 +115,12 @@ public class ControladorProgresoPaciente {
 		
 		List<ProgresoPesoIdeal> listaPesoIdeal = formula.generarListaPesoIdeal(paciente.getFecha_inicio(), diasObjetivo, paciente.getPeso(), caloriasPGPorDia);
 
-		List<CompararProgresoDTO> listaComparacion = formula.generarListaComparacion(servicioRegistrarPeso.ObtenerRegistros(pacienteSelect.getId()), listaPesoIdeal);
+		List<CompararProgresoDTO> listaComparacion = formula.generarListaComparacion(servicioRegistrarPeso.ObtenerRegistros(pacienteMock.getPaciente().getId()), listaPesoIdeal);
 		
+		model.put("paciente", paciente);
 		model.put("Lista", listaComparacion);
 		model.put("pesoInicial", paciente.getPeso());
+		
 		return new ModelAndView("progresoPaciente", model);
 	}
 	

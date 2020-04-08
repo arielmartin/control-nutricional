@@ -130,28 +130,7 @@ public class ControladorUsuario {
 	}
 	
 	
-	@RequestMapping(path = "/selectPaciente", method = RequestMethod.POST)
-	public ModelAndView selectPaciente(@ModelAttribute("paciente") Paciente paciente, HttpServletRequest request) {
-		ModelMap model = new ModelMap();
 
-		paciente = servicioPacientes.obtenerPaciente(paciente.getId() );
-		model.put("paciente", paciente);
-		
-		// servicio para obtener listado de pacientes
-		List<Paciente> listadoPacientes = servicioPacientes.obtenerListadoPacientes();
-		
-		if(listadoPacientes.isEmpty()) {
-			String error = "No hay pacientes cargados en el sistema.";
-			model.put("error", error);
-		}
-		
-		request.getSession().setAttribute("idUsuario", paciente.getIdUsuario() );
-		request.getSession().setAttribute("NOMBRE_PACIENTE", paciente.getNombre() );
-		
-		model.put("listadoPacientes", listadoPacientes);
-		
-		return new ModelAndView("home_view", model);
-	}
 
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
@@ -199,42 +178,5 @@ public class ControladorUsuario {
 		return new ModelAndView("registrar_usuario_view", modelo);
 	}
 	
-	
-	@RequestMapping(path = "/crear_usuario", method = RequestMethod.POST)
-	public ModelAndView crearUsuario(@ModelAttribute("usuario") Usuario usuario, HttpServletRequest request) {
-		
-		ModelMap model = new ModelMap();
-
-		if (usuario != null) {
-			
-			// invoca el metodo crearUsuario del servicio
-			if(servicioLogin.ckeckMailUsuarioar(usuario)){
-				model.put("usuario", usuario);
-				PacienteDTO pacienteDTO = new PacienteDTO();
-				pacienteDTO.setUsuario(usuario);
-				//request.getSession().setAttribute("idUsuario", usuario.getId());
-				request.getSession().setAttribute("APELLIDO_PACIENTE", usuario.getApellido() );
-				request.getSession().setAttribute("NOMBRE_PACIENTE", usuario.getNombre() );
-				request.getSession().setAttribute("fnac", usuario.getFechaNacimiento() );
-				request.getSession().setAttribute("email", usuario.getEmail() );
-				request.getSession().setAttribute("pass", usuario.getPassword() );
-				
-				//pacienteDTO.setFnac( usuario.getFechaNacimiento() );
-				//pacienteDTO.setEdad( usuario.getFechaNacimiento() );
-
-				model.put("pacienteDTO", pacienteDTO);
-				return new ModelAndView("paciente_view", model);
-			}
-			else {
-				model.put("error", "El E-mail Ingresado ya esta Registrado. Por Favor ingrese otro E-mail");
-				return new ModelAndView("registrar_usuario_view", model);
-			}
-			
-		} else {
-			// si el usuario no existe agrega un mensaje de error en el modelo.
-			model.put("error", "Usuario o clave incorrecta");
-		}
-		return new ModelAndView("registrar_usuario_view", model);
-	}
 	
 }

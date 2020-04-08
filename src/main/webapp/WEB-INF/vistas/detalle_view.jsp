@@ -34,34 +34,15 @@
 		
 		<div class = "main container">
 		
-		<form:form action="finalizarRegistro" method="POST" modelAttribute="pacienteDTO">
-			
-			<div id="stepperbox"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" style="margin-top:50px;">
-			<!--<div id="stepperbox"  class="mainbox" style="margin-top:50px;">-->
-				<!-- Stepper -->
-				<div class="steps-form-2">
-				    <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
-				        <div class="steps-step-2">
-				            <label class="btn-circle-2" data-toggle="tooltip" data-placement="top"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></label><br>PACIENTE
-				        </div>
-				        <div class="steps-step-2">
-				            <label class="btn-circle-2" data-toggle="tooltip" data-placement="top"><i class="glyphicon glyphicon-check" aria-hidden="true"></i></label><br>EXCLUSIONES
-				        </div>
-				        <div class="steps-step-2">
-				            <label class="btn-circle-2" data-toggle="tooltip" data-placement="top"><i class="glyphicon glyphicon-cutlery" aria-hidden="true"></i></label><br>PLANES
-				        </div>
-				        <div class="steps-step-2">
-				            <label class="btn-circle-2-selected" data-toggle="tooltip" data-placement="top"><i class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></i></label><br>TU PLAN
-				        </div>
-				    </div>
-				</div>
-			</div>
+		<form:form action="progresoPaciente" method="POST" modelAttribute="pacienteDTO">
 				
-			<div id="plan"  class="mainbox col-md-8 col-sm-1 col-sm-offset-2">	
+			<div id="plan"  class="mainbox col-md-12 col-sm-8 col-sm-offset-2">	
 			<!--<div id="loginbox"  class="mainbox">-->
 			
+			<div id="table" class="mainbox col-md-12">
 				
-				<div id="table" class="mainbox col-md-12">
+			<h3 class="form-signin-heading">Detalle del paciente: ${pacienteDTO.paciente.nombre}</h3>
+			<hr class="colorgraph"><br>
 					
 					<h2>Plan escogido: ${pacienteDTO.plan.nombre}</h2>
 					<h4>Intensidad: ${pacienteDTO.plan.intensidad } ${pacienteDTO.plan.caloriasDiarias } Kcal. diarias</h4> 
@@ -105,7 +86,7 @@
 				
 				<br>
 	
-				<div id="grafico"  class="mainbox col-md-8 col-sm-1 col-sm-offset-2">	
+				<div id="grafico"  class="mainbox col-md-8 col-sm-8 col-sm-offset-2">	
 				<!--  <div class="mainbox">-->
 				<br>
 					<h2 class="center">Tiempo estimado en cumplir objetivo</h2>
@@ -141,7 +122,7 @@
 				
 				<div class="row">
 				
-					<div   class="mainbox col-md-4 col-sm-1 col-sm-offset-3">	
+					<div   class="mainbox col-md-4 col-sm-4 col-sm-offset-3">	
 						<!--  <div class="mainbox">-->
 						<br>
 						<h2>Datos del Paciente</h2>
@@ -171,26 +152,16 @@
 						<br>
 						</c:if>
 						<span>Días objetivo: ${diasObjetivo} Dias</span>
+						<br><br>
 					</div>
 				
 				
-				
-				<form:input type="hidden" path="paciente.peso" value="${paciente.peso}"/>
-				<form:input type="hidden" path="paciente.altura" value="${paciente.altura}"/>
-				<form:input type="hidden" path="paciente.sexo" value="${paciente.sexo}"/>
-				<form:input type="hidden" path="paciente.edad" value="${paciente.edad}"/>
-				<form:input type="hidden" path="paciente.ejercicio" value="${paciente.ejercicio}"/>
-				<form:input type="hidden" path="plan.id" value="${pacienteDTO.plan.id}"/>
+				<form:input type="hidden" path="paciente.id" value="${pacienteDTO.paciente.id}"/>
 				
 				<div   class="mainbox col-md-4 col-sm-2 col-sm-offset-1" style="margin-top:8em;">
-					<button class="btn btn-lg btn-primary " Type="Submit">Confirmar Registro</button>
+					<button class="btn btn-lg btn-primary " Type="Submit">Ver progreso</button>
 				</div>
-				
-				<div   class="mainbox col-md-4 col-sm-2 col-sm-offset-1" style="margin-top:2em;">
-					<button class="btn btn-lg btn-default " Type="submit">Cancelar</button><br><br>
-				</div>
-				
-				
+					
 			</div>
 				
 			</form:form>

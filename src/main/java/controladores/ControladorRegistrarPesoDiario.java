@@ -106,7 +106,7 @@ public class ControladorRegistrarPesoDiario {
 		servicioRegistrarPesoDiario.RegistrarPesoDiario(new RegistrarPesoDiarioDTO("14/07/2018",(float)70,idUsuario));
 		servicioRegistrarPesoDiario.RegistrarPesoDiario(new RegistrarPesoDiarioDTO("15/07/2018",(float)70,idUsuario));
 		
-		return new ModelAndView("home", model);
+		return new ModelAndView("home_view", model);
 	}
 	
 }

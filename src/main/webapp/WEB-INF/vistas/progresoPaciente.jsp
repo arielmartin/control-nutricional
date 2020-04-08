@@ -17,6 +17,7 @@
 		
 		<header class="header container">
 			<h1 class="logo">Control Nutricional</h1>
+           
             <nav>
                  <ul class="container">
                     <li><a class="btn" href="home">Inicio</a></li>
@@ -32,34 +33,12 @@
                     	<li><a class="btn" href="historialDeComidas">Historial Comidas</a></li>
                 </ul>
             </nav>
+            
 		</header>
+		
 		<div class = "main container">
 		
-		<table class="table container">
-			  <thead>
-			    <tr>
-			      <th scope="col">Fecha</th>
-			      <th scope="col">Peso Ideal</th>
-			      <th scope="col">Peso Registrado por Usuario</th>
-			      <th scope="col">Evaluacion</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			  <c:forEach items="${Lista}" var="listado">
-			    <tr>
-			      <td>${listado.fecha}</td>
-			      <td><fmt:formatNumber type="number" maxFractionDigits="2" value="${listado.pesoIdeal}"/> kgs.</td>
-			      <td>${listado.pesoRegistrado} kgs.</td>
-			      <c:if test="${listado.pesoIdeal >= listado.pesoRegistrado}">
-			      <td style="background-color:#A3D444;">- <fmt:formatNumber type="number" maxFractionDigits="2" value="${listado.pesoIdeal - listado.pesoRegistrado}"/> kgs.</td> 
-		       	  </c:if>	
-		       	  <c:if test="${listado.pesoIdeal < listado.pesoRegistrado}">
-			      <td style="background-color:#F04A58;">+ <fmt:formatNumber type="number" maxFractionDigits="2" value="${listado.pesoRegistrado - listado.pesoIdeal}"/> kgs.</td> 
-		       	  </c:if>	
-			    </tr>
-			  </c:forEach> 
-
-			  <div id="grafico"  class="mainbox col-md-8 col-sm-1 col-sm-offset-2">
+			<div id="grafico"  class="mainbox col-md-10 col-md-12 col-sm-12 col-lg-offset-2 col-md-offset-1">
 				<!--  <div class="mainbox">-->
 				<br>
 					<h2 class="center">Tiempo estimado en cumplir objetivo</h2>
@@ -99,13 +78,45 @@
 										); 
 							</script>
 					</div>
-				</div>
-
+			</div>
+		
+			<table class="table containercol-md-12 col-sm-12 ">
+		
+			  <thead>
+			    <tr>
+			      <th scope="col">Fecha</th>
+			      <th scope="col">Peso Ideal</th>
+			      <th scope="col">Peso Registrado</th>
+			      <th scope="col">Evaluacion</th>
+			    </tr>
+			  </thead>
+			  
+			  	<tr>
+			      <td scope="col">${paciente.fecha_inicio}</td>
+			      <td scope="col">Peso Inicial</td>
+			      <td scope="col">${paciente.peso} kgs.</td>
+			      <td scope="col"></td>
+			    </tr>
+			    
+			  <tbody>
+				  <c:forEach items="${Lista}" var="listado">
+				    <tr>
+				      <td>${listado.fecha}</td>
+				      <td><fmt:formatNumber type="number" maxFractionDigits="2" value="${listado.pesoIdeal}"/> kgs.</td>
+				      <td>${listado.pesoRegistrado} kgs.</td>
+				      <c:if test="${listado.pesoIdeal >= listado.pesoRegistrado}">
+				      <td style="background-color:#A3D444;">- <fmt:formatNumber type="number" maxFractionDigits="2" value="${listado.pesoIdeal - listado.pesoRegistrado}"/> kgs.</td> 
+			       	  </c:if>	
+			       	  <c:if test="${listado.pesoIdeal < listado.pesoRegistrado}">
+				      <td style="background-color:#F04A58;">+ <fmt:formatNumber type="number" maxFractionDigits="2" value="${listado.pesoRegistrado - listado.pesoIdeal}"/> kgs.</td> 
+			       	  </c:if>	
+				    </tr>
+				  </c:forEach> 
 			  </tbody>
-		</table>
-			
-
-			
+			  
+			</table>
+			  
+			  
 		</div>
 		
 		<jsp:include page="footer.jsp"></jsp:include>

@@ -45,15 +45,15 @@
 					<c:choose>
 						<c:when test="${not empty error}">
 					<hr class="colorgraph"><br>
-							<%--Bloque que es visible si el elemento error no está vacío	--%>
+							<%--Bloque que es visible si el elemento error no esta vacio	--%>
 					        <h4><span style="color:red;">${error}</span></h4>
 					        <br>
 				        </c:when>
 				        <c:otherwise>
 				        
-							<form:form action="progresoPaciente" method="POST" modelAttribute="paciente">
+							<form:form action="progresoPaciente" method="POST" modelAttribute="pacienteDTO">
 								<label>Paciente</label>				
-								<form:select path="id" class="form-control">
+								<form:select path="paciente.id" class="form-control">
 								<c:forEach items="${listadoPacientes}" var = "i">
 								<form:option value="${i.id}">${i.nombre}</form:option>
 								</c:forEach>]

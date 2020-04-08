@@ -26,6 +26,7 @@ public class ControladorPlan {
 	@Inject
 	private ServicioPacientes servicioPacientes;
 	
+	
 	@RequestMapping(path = "/verplan", method = RequestMethod.GET)
 	public ModelAndView verplan() {
 		ModelMap model = new ModelMap();
@@ -39,12 +40,13 @@ public class ControladorPlan {
 		Long idPlan=servicioPacientes.getIdPlanByIdPaciente(idPaciente);
 
 		//con el id del plan obtenemos el plan
-		plan=servicioPlan.consultarPlan(idPlan);
+		plan = servicioPlan.consultarPlan(idPlan);
 		
 		model.put("plan",plan);
 		
 		return new ModelAndView("verplan", model);
 	}
+	
 	
 	@RequestMapping(path = "/cargarPlanes", method = RequestMethod.GET)
 	public ModelAndView cargarDatosRoot(HttpServletRequest request) {

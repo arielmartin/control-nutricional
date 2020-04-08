@@ -35,12 +35,13 @@
 				<%--debe referenciar con el nombre usuario, spring mapea los elementos de la vista con los atributos de dicho objeto--%>
 				<%--para eso debe coincidir el valor del elemento path de cada input con el nombre de un atributo del objeto --%>
 				
-				<form:form action="crear_usuario" method="POST" modelAttribute="usuario">
+				<form:form action="paciente" method="POST" modelAttribute="usuario">
 			    	<h3 class="form-signin-heading">Registrar usuario</h3>
 					<hr class="colorgraph"><br>
 
 					<%--Elementos de entrada de datos, el elemento path debe indicar en que atributo del objeto usuario se guardan los datos ingresados--%>
-					Nombre: <form:input path="nombre" id="nombre" type="text" class="form-control" required="required"/>
+					Nombre: 
+					<form:input path="nombre" id="nombre" type="text" class="form-control" required="required"/>
 					Apellido: <form:input path="apellido" id="apellido" type="text" class="form-control" required="required"/>
 					Fecha de Nacimiento: <form:input path="fechaNacimiento" id="fechaNacimiento" type="date" class="form-control" required="required"/>
 					<br>

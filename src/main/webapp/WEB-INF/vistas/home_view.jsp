@@ -16,6 +16,7 @@
 
 		<header class="header container">
 			<h1 class="logo">Control Nutricional</h1>
+            
             <nav>
                  <ul class="container">
                  	<c:if test="${ID==null}">
@@ -34,6 +35,7 @@
  
                 </ul>
             </nav>
+            
 		</header>
 		
 		<div class = "main container">	

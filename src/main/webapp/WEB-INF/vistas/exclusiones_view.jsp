@@ -30,10 +30,9 @@
             </nav>
 		</header>
 		
-		${usuario.id}
-		
 		<div class = "main container">	
 			<div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+				
 				<!-- Stepper -->
 				<div class="steps-form-2">
 				    <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
@@ -87,6 +86,7 @@
 				<button class="btn btn-lg btn-primary btn-block" Type="Submit">Siguiente</button>
 			
 			</form:form>
+			
 			</div>
 		</div>
 		
