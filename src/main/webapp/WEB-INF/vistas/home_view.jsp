@@ -1,5 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -21,26 +23,26 @@
                     </c:if>
                     <li><a class="btn active white" href="home">Inicio</a></li>
                     <c:if test="${ROL=='medico'}" >
-                    	<li><a class="btn" href="registrarusuario">Registrar Paciente</a></li>  
-                    	<li><a class="btn" href="registrarPesoDiario">Registrar Peso Diario</a></li>
+                    	<li><a class="btn" href="registrar_usuario">Registrar Paciente</a></li>  
+                    	<li><a class="btn" href="registrarPeso">Registrar Peso</a></li>
                    		<li><a class="btn" href="progresoSeleccionarPaciente">Ver Progreso</a></li>
                    	</c:if>
                     <c:if test="${ROL!='medico' && idUsuario!=null}" >
                     	<li><a class="btn" href="verplan">Ver Plan</a></li>
                     	<li><a class="btn" href="registrarConsumoAlimento">Registrar Comida</a></li>
                     </c:if>
-                    	
-                    <c:if test="${idUsuario!=null}">
-                    	<li><a class="btn" href="historialDeComidas">Historial Comidas</a></li>
-                    </c:if>
+ 
                 </ul>
             </nav>
 		</header>
 		
 		<div class = "main container">	
 		
-		<div id="home" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-			Bienvenido ${APELLIDO} ! Elige en el Menu.<br>
+		<div id="home" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			
+			<h3 class="form-signin-heading">Bienvenido ${APELLIDO} ! Elige en el Menu.</h3>
+			<hr class="colorgraph"><br>
+			
 			<c:if test="${ROL=='medico'}" >
 			Paciente seleccionado: ${NOMBRE_PACIENTE}
 			</c:if>
@@ -63,12 +65,14 @@
 				        
 							<form:form action="selectPaciente" method="POST" modelAttribute="paciente">
 								<br>
-								<label>Paciente</label>				
+								<label>Paciente</label>
+										
 								<form:select path="id" class="form-control">
 								<c:forEach items="${listadoPacientes}" var = "i">
 									<form:option value="${i.id}">${i.nombre}</form:option>
-								</c:forEach>]
+								</c:forEach>
 								</form:select>
+								
 								<br />
 								<br />
 								<button class="btn btn-lg btn-primary btn-block" Type="Submit">Seleccionar</button>

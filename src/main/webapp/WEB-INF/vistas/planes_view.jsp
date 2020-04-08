@@ -17,8 +17,8 @@
                  <ul class="container">
                     <li><a href="home">Inicio</a></li>
                     <c:if test="${ROL=='medico'}" >
-                    	<li><a class="btn" href="registrarusuario">Registrar Paciente</a></li>  
-                    	<li><a class="btn" href="registrarPesoDiario">Registrar Peso Diario</a></li>
+                    	<li><a class="btn" href="registrar_usuario">Registrar Paciente</a></li>  
+                    	<li><a class="btn" href="registrarPeso">Registrar Peso</a></li>
                    		<li><a class="btn" href="progresoSeleccionarPaciente">Ver Progreso</a></li>
                    	</c:if>
                     <c:if test="${ROL!='medico'}" >
@@ -51,7 +51,7 @@
 			</div>
 			
 			<h3>Estos son los planes sugeridos: </h3>
-			<p>Peso Actual:${pacienteDTO.paciente.peso} Peso ideal: ${pacienteDTO.pesoIdeal}</p>
+			<p>Peso Actual:${pacienteDTO.paciente.peso} Peso ideal: ${pacienteDTO.pesoIdeal} Objetivo: ${pacienteDTO.objetivo} de peso</p>
 			
 			<c:if test="${pacienteDTO.excluirCarne}" >
 				<span>Sin carnes</span>
@@ -73,8 +73,7 @@
 
 			<form:form action="final" method="POST" modelAttribute="pacienteDTO">
 			
-			  
-				<c:forEach items="${planesSugeridos}" var = "item" >
+				<c:forEach items="${planesSugeridos}" var = "item">
 					<form:radiobutton path="plan.id" value="${item.id}" required="required"/> ${item.nombre} - ${item.caloriasDiarias} calorías diarias <br>
 				</c:forEach>
 			

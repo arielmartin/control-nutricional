@@ -37,7 +37,7 @@ public class PacienteDaoTest extends SpringTest{
 		Paciente paciente = new Paciente(80d, 170d);
 		paciente.setNombre("Ariel");
 		
-		Long pacienteId = pacienteDao.savePacienteInBd(paciente);
+		Long pacienteId = pacienteDao.savePaciente(paciente);
 		
 		pacienteDao.getPacienteById(pacienteId);
 		
@@ -51,7 +51,7 @@ public class PacienteDaoTest extends SpringTest{
 		Paciente paciente = new Paciente(80d, 170d);
 		paciente.setNombre("Tomas");
 		
-		Long id=pacienteDao.savePacienteInBd(paciente);
+		Long id=pacienteDao.savePaciente(paciente);
 		
 		Double peso=pacienteDao.getPesoPaciente(id);
 		

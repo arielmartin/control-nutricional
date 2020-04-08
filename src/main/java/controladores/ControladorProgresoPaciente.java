@@ -47,8 +47,9 @@ public class ControladorProgresoPaciente {
 		this.servicioRegistrarPeso = servicioRegistrarPesoDiario;
 	}
 	
+	
 	@RequestMapping(path = "/progresoSeleccionarPaciente", method = RequestMethod.GET)
-	public ModelAndView verProgresoSeleccionarPaciente(HttpServletRequest request) {
+	public ModelAndView progresoSeleccionarPaciente(HttpServletRequest request) {
 		ModelMap model = new ModelMap();
 		
 		Paciente paciente = new Paciente();
@@ -69,8 +70,9 @@ public class ControladorProgresoPaciente {
 		return new ModelAndView("progresoSeleccionarPaciente", model);
 	}
 	
+	
 	@RequestMapping(path = "/progresoPaciente", method = RequestMethod.POST)
-	public ModelAndView verProgresoPaciente(@ModelAttribute("paciente") Paciente pacienteSelect, HttpServletRequest request) {
+	public ModelAndView progresoPaciente(@ModelAttribute("paciente") Paciente pacienteSelect, HttpServletRequest request) {
 		ModelMap model = new ModelMap();
 		
 		//Long longId = idUsuario;
@@ -81,7 +83,7 @@ public class ControladorProgresoPaciente {
 		if(paciente == null) {
 			
 			model.put("error", "ERROR: El Usuario no tiene Registrado ningun Plan. Por favor Registre un plan");
-			return new ModelAndView("home", model);
+			return new ModelAndView("home_view", model);
 		}
 		
 		Plan plan = servicioPlan.consultarPlan(paciente.getPlanAsociado_id());
@@ -115,4 +117,5 @@ public class ControladorProgresoPaciente {
 		model.put("pesoInicial", paciente.getPeso());
 		return new ModelAndView("progresoPaciente", model);
 	}
+	
 }

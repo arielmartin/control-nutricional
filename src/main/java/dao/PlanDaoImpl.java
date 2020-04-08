@@ -42,6 +42,7 @@ public class PlanDaoImpl implements PlanDao {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Plan> obtenerPlanesFiltrados(String intensidad, boolean aptoCeliaco, boolean aptoHipertenso, boolean sinCarne, boolean sinLacteos) {
 
@@ -61,10 +62,11 @@ public class PlanDaoImpl implements PlanDao {
 		return planesFiltrados;
 	}
 	
+	
 	@Override
 	public Plan generarPlanSugerido(PacienteDTO pacienteDTO) {
 
-		final Session session = sessionFactory.getCurrentSession();
+		//final Session session = sessionFactory.getCurrentSession();
 		
 		Plan planBase = new Plan();
 		planBase.setNombre("Plan ");
@@ -183,7 +185,7 @@ public class PlanDaoImpl implements PlanDao {
 		plan0000NB.setMerienda(merienda);
 		plan0000NB.setColacion2(colacion2);
 		plan0000NB.setCena(cena);
-		
+		plan0000NB.setObjetivo("bajar");
 		
 		Plan plan1000NB = new Plan();
 		plan1000NB.setNombre("Plan Lacto-Vegetariano");
@@ -199,6 +201,7 @@ public class PlanDaoImpl implements PlanDao {
 		plan1000NB.setMerienda(merienda);
 		plan1000NB.setColacion2(colacion2);
 		plan1000NB.setCena(cena);
+		plan1000NB.setObjetivo("bajar");
 		
 		Plan plan1100NB = new Plan();
 		plan1100NB.setNombre("Plan Vegetariano");
@@ -214,6 +217,7 @@ public class PlanDaoImpl implements PlanDao {
 		plan1100NB.setMerienda(merienda);
 		plan1100NB.setColacion2(colacion2);
 		plan1100NB.setCena(cena);
+		plan1100NB.setObjetivo("bajar");
 		
 		Plan plan0100NB = new Plan();
 		plan0100NB.setNombre("Plan Intolerante Lactosa");
@@ -229,6 +233,7 @@ public class PlanDaoImpl implements PlanDao {
 		plan0100NB.setMerienda(merienda);
 		plan0100NB.setColacion2(colacion2);
 		plan0100NB.setCena(cena);
+		plan0100NB.setObjetivo("bajar");
 		
 		Plan plan0001NB = new Plan();
 		plan0001NB.setNombre("Plan Sin Gluten");
@@ -244,6 +249,7 @@ public class PlanDaoImpl implements PlanDao {
 		plan0001NB.setMerienda(merienda);
 		plan0001NB.setColacion2(colacion2);
 		plan0001NB.setCena(cena);
+		plan0001NB.setObjetivo("bajar");
 		
 		Plan plan0010NB = new Plan();
 		plan0010NB.setNombre("Plan Bajo en Sodio");
@@ -259,6 +265,7 @@ public class PlanDaoImpl implements PlanDao {
 		plan0010NB.setMerienda(merienda);
 		plan0010NB.setColacion2(colacion2);
 		plan0010NB.setCena(cena);
+		plan0010NB.setObjetivo("bajar");
 		
 		//Planes Intensiadad Normal (Subir Peso)
 		Plan plan0000NS = new Plan();
@@ -275,6 +282,7 @@ public class PlanDaoImpl implements PlanDao {
 		plan0000NS.setMerienda(merienda);
 		plan0000NS.setColacion2(colacion2);
 		plan0000NS.setCena(cena);
+		plan0000NS.setObjetivo("subir");
 		
 		Plan plan1000NS = new Plan();
 		plan1000NS.setNombre("Plan Alto en Carbohidratos Lacto-Vegetariano");
@@ -290,6 +298,7 @@ public class PlanDaoImpl implements PlanDao {
 		plan1000NS.setMerienda(merienda);
 		plan1000NS.setColacion2(colacion2);
 		plan1000NS.setCena(cena);
+		plan1000NS.setObjetivo("subir");
 		
 		Plan plan0010NS = new Plan();
 		plan0010NS.setNombre("Plan Alto en Carbohidratos bajo en sodio");
@@ -305,6 +314,7 @@ public class PlanDaoImpl implements PlanDao {
 		plan0010NS.setMerienda(merienda);
 		plan0010NS.setColacion2(colacion2);
 		plan0010NS.setCena(cena);
+		plan0010NS.setObjetivo("subir");
 		
 		Plan plan0001NS = new Plan();
 		plan0001NS.setNombre("Plan Alto en Carbohidratos sin Gluten");
@@ -320,6 +330,7 @@ public class PlanDaoImpl implements PlanDao {
 		plan0001NS.setMerienda(merienda);
 		plan0001NS.setColacion2(colacion2);
 		plan0001NS.setCena(cena);
+		plan0001NS.setObjetivo("subir");
 	
 		session.save(plan0000NB);
 		session.save(plan1000NB);

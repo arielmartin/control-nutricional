@@ -6,6 +6,10 @@ import modelo.Usuario;
 public interface ServicioLogin {
 
 	Usuario consultarUsuario(Usuario usuario);
-	boolean crearUsuario(Usuario usuario);
+	
+	Long crearUsuario(Usuario usuario);
+	
 	public void cargarUsuariosIniciales() ;
+
+	boolean ckeckMailUsuarioar(Usuario usuario);
 }

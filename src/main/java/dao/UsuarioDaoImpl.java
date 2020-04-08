@@ -10,13 +10,14 @@ import modelo.Usuario;
 import javax.inject.Inject;
 
 // implelemtacion del DAO de usuarios, la anotacion @Repository indica a Spring que esta clase es un componente que debe
-// ser manejado por el framework, debe indicarse en applicationContext que busque en el paquete ar.edu.unlam.tallerweb1.dao
+// ser manejado por el framework, debe indicarse en applicationContext que busque en el paquete "dao"
 // para encontrar esta clase.
+
 @Repository("usuarioDao")
 public class UsuarioDaoImpl implements UsuarioDao {
 
-	// Como todo dao maneja acciones de persistencia, normalmente estar√° inyectado el session factory de hibernate
-	// el mismo est√° difinido en el archivo hibernateContext.xml
+	// Como todo dao maneja acciones de persistencia, normalmente estar· inyectado el session factory de hibernate
+	// el mismo est· difinido en el archivo hibernateContext.xml
 	@Inject
     private SessionFactory sessionFactory;
 
@@ -34,7 +35,27 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	}
 	
 	@Override
-	public boolean crearUsuario(Usuario usuario) {
+	public Long crearUsuario(Usuario usuario) {
+		
+		final Session session = sessionFactory.getCurrentSession();	
+		
+		Usuario resultado = (Usuario) session.createCriteria(Usuario.class)
+				.add(Restrictions.eq("email", usuario.getEmail()))
+				.uniqueResult();
+		
+		if(resultado != null) {
+			return  (long) 0;
+		}
+		else {
+			session.save(usuario);
+			return usuario.getId();
+		}	
+	}
+	
+	
+	@Override
+	public boolean checkMailUsuario(Usuario usuario) {
+		
 		final Session session = sessionFactory.getCurrentSession();	
 		
 		Usuario resultado = (Usuario) session.createCriteria(Usuario.class)
@@ -45,13 +66,10 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			return false;
 		}
 		else {
-			Usuario nuevo = new Usuario();
-			nuevo=usuario;
-			session.save(usuario);
 			return true;
-		}
-		
+		}	
 	}
+	
 	
 	@Override
 	public void cargarUsuariosIniciales() {

@@ -17,15 +17,14 @@
 		}
 	</script>
 
-		
 		<header class="header container">
 			<h1 class="logo">Control Nutricional</h1>
             <nav>
                  <ul class="container">
                     <li><a class="btn" href="home">Inicio</a></li>
                     <c:if test="${ROL=='medico'}" >
-                    	<li><a class="btn" href="registrarusuario">Registrar Paciente</a></li>  
-                    	<li><a class="btn" href="registrarPesoDiario">Registrar Peso Diario</a></li>
+                    	<li><a class="btn" href="registrar_usuario">Registrar Paciente</a></li>  
+                    	<li><a class="btn" href="registrarPeso">Registrar Peso</a></li>
                    		<li><a class="btn active white" href="progresoSeleccionarPaciente">Ver Progreso</a></li>
                    	</c:if>
                     <c:if test="${ROL!='medico'}" >
@@ -37,10 +36,12 @@
 		</header>
 		
 		<div class = "main container">	
-			<div class = "container">
-				<div style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+				<div  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					
 			    	<h3 class="form-signin-heading">Ver Progreso</h3>
-					<br />
+					<hr class="colorgraph"><br>
+					
+			
 					<c:choose>
 						<c:when test="${not empty error}">
 					<hr class="colorgraph"><br>
@@ -49,6 +50,7 @@
 					        <br>
 				        </c:when>
 				        <c:otherwise>
+				        
 							<form:form action="progresoPaciente" method="POST" modelAttribute="paciente">
 								<label>Paciente</label>				
 								<form:select path="id" class="form-control">
@@ -61,11 +63,10 @@
 								<button class="btn btn-lg btn-primary btn-block" Type="Submit">Siguiente</button>
 								<br />
 							</form:form>
+							
 						</c:otherwise>
 					</c:choose>
 						
-			        
-				</div>
 			</div>
 		</div>
 			  

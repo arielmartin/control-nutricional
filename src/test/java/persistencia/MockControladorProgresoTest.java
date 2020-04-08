@@ -53,7 +53,7 @@ public class MockControladorProgresoTest extends SpringTest {
 		when(planMock.getCaloriasDiarias()).thenReturn(1500);
 		when(requestMock.getSession()).thenReturn(sessionMock);
 		
-		ModelAndView modelAndView = miControlador.verProgresoPaciente(pacienteMock, requestMock);
+		ModelAndView modelAndView = miControlador.progresoPaciente(pacienteMock, requestMock);
 
 		assertThat(modelAndView.getViewName() ).isEqualTo("progresoPaciente");
 			

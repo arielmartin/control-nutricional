@@ -1,6 +1,6 @@
 package modelo;
 
-import java.util.List;
+//import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +14,7 @@ public class Plan {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nombre;
+	private String objetivo;  //subir-bajar-mantener
 	private String intensidad;
 	private boolean sinCarne;
 	private boolean sinLacteos;
@@ -127,6 +128,12 @@ public class Plan {
 	}
 	public void setCena(String cena) {
 		this.cena = cena;
+	}
+	public String getObjetivo() {
+		return objetivo;
+	}
+	public void setObjetivo(String objetivo) {
+		this.objetivo = objetivo;
 	}
 	
 	

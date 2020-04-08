@@ -11,16 +11,14 @@
 	</head>
 	<body>
 	
-
-		
 		<header class="header container">
-			<h1 class="logo">Registrar Peso Diario</h1>
+			<h1 class="logo">Control Nutricional</h1>
 			<nav>
                  <ul class="container">
                     <li><a class="btn" href="home">Inicio</a></li>
                     <c:if test="${ROL=='medico'}" >
-                    	<li><a class="btn" href="registrarusuario">Registrar Paciente</a></li>  
-                    	<li><a class="btn active white" href="registrarPesoDiario">Registrar Peso Diario</a></li>
+                    	<li><a class="btn" href="registrar_usuario">Registrar Paciente</a></li>  
+                    	<li><a class="btn active white" href="registrarPeso">Registrar Peso</a></li>
                    		<li><a class="btn" href="progresoSeleccionarPaciente">Ver Progreso</a></li>
                    	</c:if>
                     <c:if test="${ROL!='medico'}" >
@@ -30,20 +28,26 @@
                 </ul>
             </nav>
 		</header>
+		
 		<div class = "main container">	
-			<div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			<div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			
+			<h3 class="form-signin-heading">Registrar Peso</h3>
+			<hr class="colorgraph"><br>
+			
 			<c:choose>
 					<c:when test="${not empty error}">
-						<hr class="colorgraph"><br>
+						
 						<%--Bloque que es visible si el elemento error no está vacío	--%>
 				        <h4><span style="color:red;">${error}</span></h4>
-				        <br>
+				        
 			        </c:when>
-			        <c:otherwise>	
+			<c:otherwise>
+			        
 			<form:form action="completarRegistroPesoDiario" method="POST" modelAttribute="registrarPesoDiarioDTO">
 				
+				<label>Paciente</label>
 				<form:select path="idPaciente" class="form-control">
-				
 				<c:forEach items="${listaPacientes}" var = "i">
 				<form:option value="${i.id}">${i.nombre}</form:option>
 				</c:forEach>]
@@ -56,6 +60,7 @@
 				<button class="btn btn-lg btn-primary btn-block" Type="Submit">Confirmar</button>
 			
 			</form:form>
+			
 			</c:otherwise>
 				</c:choose>
 			<%--Bloque que es visible si el elemento error no está vacío	--%>

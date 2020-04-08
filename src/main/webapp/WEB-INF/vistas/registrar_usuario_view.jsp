@@ -17,8 +17,8 @@
                  <ul class="container">
                     <li><a class="btn" href="home">Inicio</a></li>
                     <c:if test="${ROL=='medico'}" >
-                    	<li><a class="btn active white" href="registrarusuario">Registrar Paciente</a></li>  
-                    	<li><a class="btn" href="registrarPesoDiario">Registrar Peso Diario</a></li>
+                    	<li><a class="btn active white" href="registrar_usuario">Registrar Paciente</a></li>  
+                    	<li><a class="btn" href="registrarPeso">Registrar Peso</a></li>
                    		<li><a class="btn" href="progresoSeleccionarPaciente">Ver Progreso</a></li>
                    	</c:if>
                     <c:if test="${ROL!='medico'}" >
@@ -31,10 +31,11 @@
 	
 		<div class = "main container">
 			<div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-				<%--Definicion de un form asociado a la accion /crear-usuario por POST. Se indica ademas que el model attribute se--%>
+				<%--Definicion de un form asociado a la accion /crear_usuario por POST. Se indica ademas que el model attribute se--%>
 				<%--debe referenciar con el nombre usuario, spring mapea los elementos de la vista con los atributos de dicho objeto--%>
-					<%--para eso debe coincidir el valor del elemento path de cada input con el nombre de un atributo del objeto --%>
-				<form:form action="crear-usuario" method="POST" modelAttribute="usuario">
+				<%--para eso debe coincidir el valor del elemento path de cada input con el nombre de un atributo del objeto --%>
+				
+				<form:form action="crear_usuario" method="POST" modelAttribute="usuario">
 			    	<h3 class="form-signin-heading">Registrar usuario</h3>
 					<hr class="colorgraph"><br>
 
@@ -50,7 +51,7 @@
 					<button class="btn btn-lg btn-primary btn-block" Type="Submit">Registrar</button>
 				</form:form>
 
-				<%--Bloque que es visible si el elemento error no está vacío	--%>
+				<%--Bloque que es visible si el elemento error no esta vacio	--%>
 				<c:if test="${not empty error}">
 			        <h4><span>${error}</span></h4>
 			        <br>

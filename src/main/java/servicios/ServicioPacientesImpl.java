@@ -44,8 +44,8 @@ public class ServicioPacientesImpl implements ServicioPacientes {
 	}
 	
 	@Override
-	public void registrarPaciente(Paciente paciente){
-		pacienteDao.savePacienteInBd(paciente);
+	public void savePaciente(Paciente paciente){
+		pacienteDao.savePaciente(paciente);
 	}
 	
 	@Override

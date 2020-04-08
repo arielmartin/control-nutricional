@@ -15,8 +15,10 @@ import modelo.RegistrarPesoDiarioDTO;
 
 @Repository("registrarPesoDiarioDao")
 public class RegistrarPesoDiarioDaoImpl implements RegistrarPesoDiarioDao{
+	
 	@Inject
     private SessionFactory sessionFactory;
+	
 	
 	@Override
 	public boolean ConsultarRegistroFecha(int id, String fecha) {
@@ -36,29 +38,31 @@ public class RegistrarPesoDiarioDaoImpl implements RegistrarPesoDiarioDao{
 	@Override
 	public void RegistrarPesoDiario(RegistrarPesoDiarioDTO registrarPesoDiarioDTO) {
 		final Session session = sessionFactory.getCurrentSession();
-		session.save(registrarPesoDiarioDTO);
-		
+		session.save(registrarPesoDiarioDTO);	
 	}
 	
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<RegistrarPesoDiarioDTO> ObtenerRegistros(Long id) {
 		final Session session = sessionFactory.getCurrentSession();
 		List<RegistrarPesoDiarioDTO> resultado = 	session.createCriteria(RegistrarPesoDiarioDTO.class)
 													.add(Restrictions.eq("idPaciente", id))
 													.list();
-		
 		return resultado;
 	}
 	
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Paciente> ObtenerPacientes(Long id) {
 		final Session session = sessionFactory.getCurrentSession();
 		List<Paciente> resultado = 	session.createCriteria(Paciente.class)
-													.add(Restrictions.eq("medicoAsociado_id", id))
-													.list();
-		
+									.add(Restrictions.eq("medicoAsociado_id", id))
+									.list();
 		return resultado;
 	}
+	
 	
 	@Override
 	public void cargarRegistrosIniciales() {

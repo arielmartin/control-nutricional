@@ -21,8 +21,8 @@
                  <ul class="container">
                     <li><a class="btn" href="home">Inicio</a></li>
                     <c:if test="${ROL=='medico'}" >
-                    	<li><a class="btn" href="registrarusuario">Registrar Paciente</a></li>  
-                    	<li><a class="btn" href="registrarPesoDiario">Registrar Peso Diario</a></li>
+                    	<li><a class="btn" href="registrar_usuario">Registrar Paciente</a></li>  
+                    	<li><a class="btn" href="registrarPeso">Registrar Peso</a></li>
                    		<li><a class="btn active white" href="progresoSeleccionarPaciente">Ver Progreso</a></li>
                    	</c:if>
                     <c:if test="${ROL!='medico'}" >
@@ -59,10 +59,11 @@
 			    </tr>
 			  </c:forEach> 
 
-			  <div id="grafico"  class="mainbox col-md-8 col-sm-1 col-sm-offset-2">	
+			  <div id="grafico"  class="mainbox col-md-8 col-sm-1 col-sm-offset-2">
 				<!--  <div class="mainbox">-->
 				<br>
 					<h2 class="center">Tiempo estimado en cumplir objetivo</h2>
+					
 					<c:set var="pesoPGPorMes" value="${(caloriasPGPorDia*4)/1000}" />
 					<c:set var="contador" value="${peso}" />  
 					<div class="chartjs-wrapper">

@@ -21,7 +21,7 @@
                     <li><a class="btn" href="home">Inicio</a></li>
                     <c:if test="${ROL=='medico'}" >
                     	<li><a class="btn" href="registrarusuario">Registrar Paciente</a></li>  
-                    	<li><a class="btn" href="registrarPesoDiario">Registrar Peso Diario</a></li>
+                    	<li><a class="btn" href="registrarPeso">Registrar Peso</a></li>
                    		<li><a class="btn" href="progresoSeleccionarPaciente">Ver Progreso</a></li>
                    	</c:if>
                     <c:if test="${ROL!='medico'}" >
@@ -31,7 +31,9 @@
                 </ul>
             </nav>
 		</header>
+		
 		<div class = "main container">
+		
 		<form:form action="finalizarRegistro" method="POST" modelAttribute="pacienteDTO">
 			
 			<div id="stepperbox"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" style="margin-top:50px;">
@@ -100,8 +102,8 @@
 			        </table>
 				</div>
 				</div>
-<br>
 				
+				<br>
 	
 				<div id="grafico"  class="mainbox col-md-8 col-sm-1 col-sm-offset-2">	
 				<!--  <div class="mainbox">-->
@@ -138,37 +140,38 @@
 				</div>
 				
 				<div class="row">
-				<div   class="mainbox col-md-3 col-sm-1 col-sm-offset-3">	
-				<!--  <div class="mainbox">-->
-					<br>
-					<h2>Datos del Paciente</h2>
-					<br>
-					<span>Peso inicial del Paciente: ${peso} Kg.</span>
-					<br>
-					<span>TMB: ${tmb} Calorias.</span><span class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="La tasa metabólica basal (TMB) es el cálculo de las calorías mínimas que precisa una persona para realizar sus funciones orgánicas cada día.">
-					?
-					</span>
-					<br>
-					<span>Peso Objetivo: ${pesoIdeal} Kg.</span>
-					<br>
-					<c:if test="${peso > pesoIdeal}">
-					<span>Peso a Perder: ${pesoAPerderOGanar} Kg.</span>
-					<br>
-					</c:if>
-					<c:if test="${peso < pesoIdeal}">
-					<span>Peso a Ganar: ${pesoAPerderOGanar} Kg.</span>
-					<br>
-					</c:if>
-					<c:if test="${tmb > pacienteDTO.plan.caloriasDiarias}">
-					<span>Calorías perdidas por día: ${caloriasPGPorDia} Calorias.</span>
-					<br>
-					</c:if>
-					<c:if test="${tmb < pacienteDTO.plan.caloriasDiarias}">
-					<span>Calorías Ganadas por día: ${caloriasPGPorDia} Calorias.</span>
-					<br>
-					</c:if>
-					<span>Días objetivo: ${diasObjetivo} Dias</span>
-				</div>
+				
+					<div   class="mainbox col-md-4 col-sm-1 col-sm-offset-3">	
+						<!--  <div class="mainbox">-->
+						<br>
+						<h2>Datos del Paciente</h2>
+						<br>
+						<span>Peso inicial del Paciente: ${peso} Kg.</span>
+						<br>
+						<span>TMB: ${tmb} Calorias.</span><span class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="La tasa metabólica basal (TMB) es el cálculo de las calorías mínimas que precisa una persona para realizar sus funciones orgánicas cada día.">
+						?
+						</span>
+						<br>
+						<span>Peso Objetivo: ${pesoIdeal} Kg.</span>
+						<br>
+						<c:if test="${peso > pesoIdeal}">
+						<span>Peso a Perder: ${pesoAPerderOGanar} Kg.</span>
+						<br>
+						</c:if>
+						<c:if test="${peso < pesoIdeal}">
+						<span>Peso a Ganar: ${pesoAPerderOGanar} Kg.</span>
+						<br>
+						</c:if>
+						<c:if test="${tmb > pacienteDTO.plan.caloriasDiarias}">
+						<span>Calorías perdidas por día: ${caloriasPGPorDia} Calorias.</span>
+						<br>
+						</c:if>
+						<c:if test="${tmb < pacienteDTO.plan.caloriasDiarias}">
+						<span>Calorías Ganadas por día: ${caloriasPGPorDia} Calorias.</span>
+						<br>
+						</c:if>
+						<span>Días objetivo: ${diasObjetivo} Dias</span>
+					</div>
 				
 				
 				
@@ -179,14 +182,19 @@
 				<form:input type="hidden" path="paciente.ejercicio" value="${paciente.ejercicio}"/>
 				<form:input type="hidden" path="plan.id" value="${pacienteDTO.plan.id}"/>
 				
-			<div   class="mainbox col-md-4 col-sm-1 col-sm-offset-1" style="margin-top:8em;">
-				<button class="btn btn-lg btn-primary " Type="Submit">Confirmar Registro</button>
+				<div   class="mainbox col-md-4 col-sm-2 col-sm-offset-1" style="margin-top:8em;">
+					<button class="btn btn-lg btn-primary " Type="Submit">Confirmar Registro</button>
+				</div>
+				
+				<div   class="mainbox col-md-4 col-sm-2 col-sm-offset-1" style="margin-top:2em;">
+					<button class="btn btn-lg btn-default " Type="submit">Cancelar</button><br><br>
+				</div>
+				
+				
 			</div>
+				
 			</form:form>
 			
-			</div>
-	
-		</div>
 	
 		<jsp:include page="footer.jsp"></jsp:include>
 		

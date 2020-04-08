@@ -17,7 +17,7 @@ public interface ServicioPacientes {
 
 	Plan generarPlanSugerido(PacienteDTO pacienteDTO);
 	
-	void registrarPaciente(Paciente paciente);
+	void savePaciente(Paciente paciente);
 
 	Paciente obtenerPaciente(Long id);
 	

@@ -7,7 +7,9 @@ public interface UsuarioDao {
 	
 	Usuario consultarUsuario (Usuario usuario);
 	
-	boolean crearUsuario (Usuario usuario);
+	Long crearUsuario (Usuario usuario);
 	
 	public void cargarUsuariosIniciales();
+
+	boolean checkMailUsuario(Usuario usuario);
 }

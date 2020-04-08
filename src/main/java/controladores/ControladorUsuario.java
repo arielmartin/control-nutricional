@@ -21,7 +21,7 @@ import servicios.ServicioPacientes;
 import servicios.ServicioPlan;
 
 @Controller
-public class ControladorLogin {
+public class ControladorUsuario {
 
 	@Inject
 	private ServicioLogin servicioLogin;
@@ -43,6 +43,7 @@ public class ControladorLogin {
 		this.servicioPacientes = servicioPacientes;
 	}
 	
+	
 	@RequestMapping("/login")
 	public ModelAndView login() {
 
@@ -51,7 +52,7 @@ public class ControladorLogin {
 		Usuario usuario = new Usuario();
 		modelo.put("usuario", usuario);
 
-		return new ModelAndView("login", modelo);
+		return new ModelAndView("login_view", modelo);
 	}
 	
 	
@@ -65,10 +66,11 @@ public class ControladorLogin {
 
         request.getSession().invalidate();
 
-		return new ModelAndView("login", modelo);
+		return new ModelAndView("login_view", modelo);
 	}
 
-	@RequestMapping(path = "/login", method = RequestMethod.POST)
+	
+	@RequestMapping(path = "/home", method = RequestMethod.POST)
 	public ModelAndView validarLogin(@ModelAttribute("usuario") Usuario usuario, HttpServletRequest request) {
 		
 		ModelMap model = new ModelMap();
@@ -77,33 +79,37 @@ public class ControladorLogin {
 		if (usuarioBuscado != null) {
 
 			request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
+			
+			request.getSession().setAttribute("ID", usuarioBuscado.getId());
+			request.getSession().setAttribute("EMAIL", usuarioBuscado.getEmail());
+			request.getSession().setAttribute("APELLIDO", usuarioBuscado.getApellido());
 
+		if(usuarioBuscado.getRol() == "paciente"){
 			request.getSession().setAttribute("idUsuario", usuarioBuscado.getId() );
 			request.getSession().setAttribute("APELLIDO_PACIENTE", usuario.getApellido() );
 			request.getSession().setAttribute("NOMBRE_PACIENTE", usuario.getNombre() );
-
-			request.getSession().setAttribute("EMAIL", usuarioBuscado.getEmail());
-			request.getSession().setAttribute("ID", usuarioBuscado.getId());
-			request.getSession().setAttribute("APELLIDO", usuarioBuscado.getApellido());
+		}
 			
 			List<Paciente> listadoPacientes = servicioPacientes.obtenerListadoPacientes();
 			model.put("paciente",new Paciente() );
 			model.put("listadoPacientes", listadoPacientes);
+			
+			//request.getSession().setAttribute("listadoPacientes", listadoPacientes);
 
-			return new ModelAndView("home",model);
+			return new ModelAndView("home_view",model);
 			
 		} else {
 			// si el usuario no existe agrega un mensaje de error en el modelo.
 			model.put("error", "Usuario o clave incorrecta");
 		}
 		
-		return new ModelAndView("login", model);
+		return new ModelAndView("login_view", model);
 	}
 
 	
 	// Escucha la URL /home por GET, y redirige a una vista.
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
-	public ModelAndView irAHome() {
+	public ModelAndView home() {
 		
 			ModelMap model = new ModelMap();
 			
@@ -120,7 +126,7 @@ public class ControladorLogin {
 			
 			model.put("listadoPacientes", listadoPacientes);
 			
-			return new ModelAndView("home", model);
+			return new ModelAndView("home_view", model);
 	}
 	
 	
@@ -128,7 +134,7 @@ public class ControladorLogin {
 	public ModelAndView selectPaciente(@ModelAttribute("paciente") Paciente paciente, HttpServletRequest request) {
 		ModelMap model = new ModelMap();
 
-		paciente=servicioPacientes.obtenerPaciente(paciente.getId() );
+		paciente = servicioPacientes.obtenerPaciente(paciente.getId() );
 		model.put("paciente", paciente);
 		
 		// servicio para obtener listado de pacientes
@@ -144,7 +150,7 @@ public class ControladorLogin {
 		
 		model.put("listadoPacientes", listadoPacientes);
 		
-		return new ModelAndView("home", model);
+		return new ModelAndView("home_view", model);
 	}
 
 
@@ -182,7 +188,7 @@ public class ControladorLogin {
 	}
 	
 	
-	@RequestMapping(path ="/registrarusuario", method = RequestMethod.GET)
+	@RequestMapping(path ="/registrar_usuario", method = RequestMethod.GET)
 	public ModelAndView registarUsuario() {
 
 		ModelMap modelo = new ModelMap();
@@ -190,37 +196,45 @@ public class ControladorLogin {
 		Usuario usuario = new Usuario();
 		modelo.put("usuario", usuario);
 
-		return new ModelAndView("registrarusuario", modelo);
+		return new ModelAndView("registrar_usuario_view", modelo);
 	}
 	
-	@RequestMapping(path = "/crear-usuario", method = RequestMethod.POST)
+	
+	@RequestMapping(path = "/crear_usuario", method = RequestMethod.POST)
 	public ModelAndView crearUsuario(@ModelAttribute("usuario") Usuario usuario, HttpServletRequest request) {
+		
 		ModelMap model = new ModelMap();
 
 		if (usuario != null) {
-			// invoca el método crearUsuario del servicio
-			// SE COMENTA PORQUE TODAVIA NO ESTA CREADO EL SERVICIO
-			if(servicioLogin.crearUsuario(usuario)){
+			
+			// invoca el metodo crearUsuario del servicio
+			if(servicioLogin.ckeckMailUsuarioar(usuario)){
 				model.put("usuario", usuario);
 				PacienteDTO pacienteDTO = new PacienteDTO();
 				pacienteDTO.setUsuario(usuario);
-				request.getSession().setAttribute("idUsuario", usuario.getId());
+				//request.getSession().setAttribute("idUsuario", usuario.getId());
 				request.getSession().setAttribute("APELLIDO_PACIENTE", usuario.getApellido() );
 				request.getSession().setAttribute("NOMBRE_PACIENTE", usuario.getNombre() );
+				request.getSession().setAttribute("fnac", usuario.getFechaNacimiento() );
+				request.getSession().setAttribute("email", usuario.getEmail() );
+				request.getSession().setAttribute("pass", usuario.getPassword() );
+				
+				//pacienteDTO.setFnac( usuario.getFechaNacimiento() );
+				//pacienteDTO.setEdad( usuario.getFechaNacimiento() );
 
 				model.put("pacienteDTO", pacienteDTO);
-				return new ModelAndView("paciente", model);
+				return new ModelAndView("paciente_view", model);
 			}
 			else {
 				model.put("error", "El E-mail Ingresado ya esta Registrado. Por Favor ingrese otro E-mail");
-				return new ModelAndView("registrarusuario", model);
+				return new ModelAndView("registrar_usuario_view", model);
 			}
 			
 		} else {
 			// si el usuario no existe agrega un mensaje de error en el modelo.
 			model.put("error", "Usuario o clave incorrecta");
 		}
-		return new ModelAndView("registrarusuario", model);
+		return new ModelAndView("registrar_usuario_view", model);
 	}
 	
 }

@@ -1,6 +1,9 @@
 package modelo;
 
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,6 +28,7 @@ public class Paciente {
 	private String fecha_inicio;
 	private Long medicoAsociado_id;
 	private Long planAsociado_id;
+	private String fnac;
 		
 	public Long getMedicoAsociado_id() {
 		return medicoAsociado_id;
@@ -80,12 +84,7 @@ public class Paciente {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	public int getEdad() {
-		return edad;
-	}
-	public void setEdad(int edad) {
-		this.edad = edad;
-	}
+
 	public int getEjercicio() {
 		return ejercicio;
 	}
@@ -114,5 +113,46 @@ public class Paciente {
 		this.fecha_inicio = fecha_inicio;
 	}
 
+	public String getFnac() {
+		return fnac;
+	}
+
+	public void setFnac(String fnac) {
+		
+		this.fnac = fnac;
+	}
+
+	public int getEdad() {
+		//int edad = getEgeByDate(this.fnac);
+		return this.edad;
+	}
+	public void setEdad(int edad) {
+		//int edad = getEgeByDate(fnac);
+		this.edad = edad;
+	}
+	
+	public int getEgeByDate(String sDate) {
+
+		//String sDate=this.fechaNacimiento;
+		
+		//Convertimos el String en LocalDate
+		//LocalDate fechaNac = LocalDate.parse(sDate, DateTimeFormatter.ofPattern("dd/MM/yyyy") );
+		LocalDate fechaNac = LocalDate.parse(sDate, DateTimeFormatter.ofPattern("yyyy-MM-dd") );
+		//Obtenemos la fecha actual y en formato LocalDate
+		LocalDate fechaHoy = LocalDate.now();
+		
+		 //ahora comparar los años de las dos fechas y asi obtener la edad
+		
+	    int diffYear = fechaHoy.getYear() - fechaNac.getYear();
+	    int diffMonth = fechaHoy.getMonthValue() -fechaHoy.getMonthValue();
+	    int diffDay = fechaHoy.getDayOfMonth() - fechaNac.getDayOfMonth();
+	    
+	    // Si está en ese año pero todavía no los ha cumplido se resta 1
+	    if (diffMonth < 0 || (diffMonth == 0 && diffDay < 0)) {
+	        diffYear = diffYear - 1;
+	    }
+		
+		 return diffYear;
+	}
 	
 }

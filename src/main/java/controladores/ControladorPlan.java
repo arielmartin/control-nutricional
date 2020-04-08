@@ -27,7 +27,7 @@ public class ControladorPlan {
 	private ServicioPacientes servicioPacientes;
 	
 	@RequestMapping(path = "/verplan", method = RequestMethod.GET)
-	public ModelAndView irAveplan() {
+	public ModelAndView verplan() {
 		ModelMap model = new ModelMap();
 		Plan plan = new Plan();
 

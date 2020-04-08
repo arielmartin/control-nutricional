@@ -30,7 +30,7 @@ public class PacienteDaoImpl implements PacienteDao{
 	}
 	
 	@Override
-	public Long savePacienteInBd (Paciente paciente) {
+	public Long savePaciente(Paciente paciente) {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(paciente);
 		
@@ -89,7 +89,7 @@ public class PacienteDaoImpl implements PacienteDao{
 		
 		Paciente pacienteInfo = new Paciente();
 		pacienteInfo.setAltura((double)170);
-		pacienteInfo.setEdad(30);
+		pacienteInfo.setEdad(39);
 		pacienteInfo.setEjercicio(1);
 		pacienteInfo.setFecha_inicio("16/07/2018");
 		pacienteInfo.setId((long)1);
@@ -101,7 +101,7 @@ public class PacienteDaoImpl implements PacienteDao{
 		
 		Paciente pacienteInfo2 = new Paciente();
 		pacienteInfo2.setAltura((double)170);
-		pacienteInfo2.setEdad(23);
+		pacienteInfo2.setEdad(34);
 		pacienteInfo2.setEjercicio(1);
 		pacienteInfo2.setFecha_inicio("16/07/2018");
 		pacienteInfo2.setId((long)2);
@@ -113,7 +113,7 @@ public class PacienteDaoImpl implements PacienteDao{
 		
 		Paciente pacienteInfo3 = new Paciente();
 		pacienteInfo3.setAltura((double)175);
-		pacienteInfo3.setEdad(30);
+		pacienteInfo3.setEdad(22);
 		pacienteInfo3.setEjercicio(2);
 		pacienteInfo3.setFecha_inicio("16/07/2018");
 		pacienteInfo3.setId((long)3);
@@ -125,7 +125,7 @@ public class PacienteDaoImpl implements PacienteDao{
 		
 		Paciente pacienteInfo4 = new Paciente();
 		pacienteInfo4.setAltura((double)165);
-		pacienteInfo4.setEdad(24);
+		pacienteInfo4.setEdad(43);
 		pacienteInfo4.setEjercicio(1);
 		pacienteInfo4.setFecha_inicio("16/07/2018");
 		pacienteInfo4.setId((long)4);
@@ -137,7 +137,7 @@ public class PacienteDaoImpl implements PacienteDao{
 		
 		Paciente pacienteInfo5 = new Paciente();
 		pacienteInfo5.setAltura((double)172);
-		pacienteInfo5.setEdad(21);
+		pacienteInfo5.setEdad(29);
 		pacienteInfo5.setEjercicio(2);
 		pacienteInfo5.setFecha_inicio("16/07/2018");
 		pacienteInfo5.setId((long)5);

@@ -14,7 +14,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
-import controladores.ControladorLogin;
+import controladores.ControladorUsuario;
 import modelo.Paciente;
 import modelo.Usuario;
 import servicios.ServicioLogin;
@@ -30,7 +30,7 @@ public class MockControladorLoginTest extends SpringTest{
 		ServicioPacientes servicioPacientesMock = mock(ServicioPacientes.class);
 		HttpServletRequest requestMock=mock(HttpServletRequest.class);
 		HttpSession sessionMock=mock(HttpSession.class);
-		ControladorLogin miControlador = new ControladorLogin();
+		ControladorUsuario miControlador = new ControladorUsuario();
 		List<Paciente> pacientesMock = mock(List.class);
 		
 		miControlador.setServicioLogin(servicioLoginMock);
