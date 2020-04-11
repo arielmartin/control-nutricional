@@ -53,6 +53,7 @@ public class ControladorPaciente {
 	
 	@RequestMapping(path = "/selectPaciente", method = RequestMethod.POST)
 	public ModelAndView selectPaciente(@ModelAttribute("paciente") Paciente paciente, HttpServletRequest request) {
+		
 		ModelMap model = new ModelMap();
 
 		paciente = servicioPacientes.obtenerPaciente(paciente.getId() );

@@ -18,8 +18,8 @@
 
 		</header>
 		<div class = "main container">	
-						<div class = "container">
-			<div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					
+			<div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
 				<%--Definicion de un form asociado a la accion /validar-login por POST. Se indica ademas que el model attribute se--%>
 				<%--debe referenciar con el nombre usuario, spring mapea los elementos de la vista con los atributos de dicho objeto--%>
 					<%--para eso debe coincidir el valor del elemento path de cada input con el nombre de un atributo del objeto --%>
@@ -31,7 +31,7 @@
 
 					<%--Elementos de entrada de datos, el elemento path debe indicar en que atributo del objeto usuario se guardan los datos ingresados--%>
 					<form:label path="email">E-Mail:</form:label>
-					<form:input path="email" id="email" type="email" class="form-control" />
+					<form:input path="email" id="email" type="email" class="form-control" required="required"/>
 					<form:label path="password">Password:</form:label>
 					<form:input path="password" type="password" id="password" class="form-control"/>     		  
 					<br>
@@ -46,7 +46,7 @@
 		        
 		       <!--  <a href="registrarusuario">¿No tienes una cuenta? Registrate Aqui...</a> -->
 			</div>
-		</div>
+		
 		</div>
 		
 		<jsp:include page="footer.jsp"></jsp:include>

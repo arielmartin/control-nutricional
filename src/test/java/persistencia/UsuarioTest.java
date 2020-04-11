@@ -1,6 +1,6 @@
 package persistencia;
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertEquals;
 
 
 import javax.inject.Inject;

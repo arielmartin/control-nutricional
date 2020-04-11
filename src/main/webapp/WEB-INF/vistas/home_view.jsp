@@ -16,9 +16,11 @@
 
 		<header class="header container">
 			<h1 class="logo">Control Nutricional</h1>
+			
+			<!--<jsp:include page="nav.jsp"></jsp:include>-->
             
             <nav>
-                 <ul class="container">
+                 <ul class="">
                  	<c:if test="${ID==null}">
                     	<li><a class="btn active white" href="login">Login</a></li>
                     </c:if>
@@ -32,7 +34,6 @@
                     	<li><a class="btn" href="verplan">Ver Plan</a></li>
                     	<li><a class="btn" href="registrarConsumoAlimento">Registrar Comida</a></li>
                     </c:if>
- 
                 </ul>
             </nav>
             
@@ -45,11 +46,13 @@
 			<h3 class="form-signin-heading">Bienvenido ${APELLIDO} ! Elige en el Menu.</h3>
 			<hr class="colorgraph"><br>
 			
+			Rol: ${ROL}
 			<c:if test="${ROL=='medico'}" >
 			Paciente seleccionado: ${NOMBRE_PACIENTE}
 			</c:if>
 			<br>id usuario logeado ${ID}
 			<br>id usuario del paciente ${idUsuario}
+			
 
 				<c:if test="${ROL=='medico'}" >
 					<c:choose>

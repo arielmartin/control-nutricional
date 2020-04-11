@@ -31,6 +31,8 @@ public class MockControladorLoginTest extends SpringTest{
 		HttpServletRequest requestMock=mock(HttpServletRequest.class);
 		HttpSession sessionMock=mock(HttpSession.class);
 		ControladorUsuario miControlador = new ControladorUsuario();
+		
+		@SuppressWarnings("unchecked")
 		List<Paciente> pacientesMock = mock(List.class);
 		
 		miControlador.setServicioLogin(servicioLoginMock);
@@ -50,6 +52,6 @@ public class MockControladorLoginTest extends SpringTest{
 		
 		ModelAndView modelAndView = miControlador.validarLogin(usuarioMock, requestMock);
 
-		assertThat(modelAndView.getViewName() ).isEqualTo("home");
+		assertThat(modelAndView.getViewName() ).isEqualTo("home_view");
 	}
 }

@@ -48,6 +48,7 @@ public class PacienteDaoImpl implements PacienteDao{
 		return paciente.getPeso();	
 	}
 	
+	
 	@Override
 	public Paciente obtenerPaciente(Long id){
 
@@ -55,10 +56,20 @@ public class PacienteDaoImpl implements PacienteDao{
 		Paciente resultado = (Paciente) session.createCriteria(Paciente.class)
 											.add(Restrictions.eq("id", id))
 											.uniqueResult();
-
 		return resultado;
-		
 	}
+	
+	
+	@Override
+	public Paciente getPacienteByIdUsuario(Long idUsuario){
+
+		final Session session = sessionFactory.getCurrentSession();
+		Paciente resultado = (Paciente) session.createCriteria(Paciente.class)
+											.add(Restrictions.eq("idUsuario", idUsuario))
+											.uniqueResult();
+		return resultado;
+	}
+	
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -67,10 +78,10 @@ public class PacienteDaoImpl implements PacienteDao{
 		final Session session = sessionFactory.getCurrentSession();
 		List<Paciente> resultado = (List<Paciente>) session.createCriteria(Paciente.class)
 											.list();
-		return resultado;
-		
+		return resultado;	
 	}
 
+	
 	@Override
 	public Long getIdPlanByIdPaciente(Long id) {
 		
@@ -81,6 +92,7 @@ public class PacienteDaoImpl implements PacienteDao{
 		
 		return paciente.getPlanAsociado_id();
 	}
+	
 	
 	@Override
 	public void cargarPacientesIniciales() {

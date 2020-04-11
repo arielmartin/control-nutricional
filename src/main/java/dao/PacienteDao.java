@@ -20,4 +20,6 @@ public interface PacienteDao {
 	Long getIdPlanByIdPaciente(Long id);
 	
 	public void cargarPacientesIniciales();
+	
+	Paciente getPacienteByIdUsuario(Long idUsuario);
 }

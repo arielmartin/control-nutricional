@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import controladores.ControladorProgresoPaciente;
 import modelo.Paciente;
+import modelo.PacienteDTO;
 import modelo.Plan;
 import servicios.ServicioPacientes;
 import servicios.ServicioPlan;
@@ -27,7 +28,10 @@ public class MockControladorProgresoTest extends SpringTest {
 
 		Plan planMock = mock(Plan.class);
 
-		Paciente pacienteMock= mock(Paciente.class);
+		PacienteDTO pacienteDTOMock= mock(PacienteDTO.class);
+		
+		Paciente pacienteMock = pacienteDTOMock.getPaciente();
+		
 		HttpServletRequest requestMock=mock(HttpServletRequest.class);
 		HttpSession sessionMock=mock(HttpSession.class);
 		ServicioPlan servicioPlanMock= mock(ServicioPlan.class);
@@ -53,7 +57,7 @@ public class MockControladorProgresoTest extends SpringTest {
 		when(planMock.getCaloriasDiarias()).thenReturn(1500);
 		when(requestMock.getSession()).thenReturn(sessionMock);
 		
-		ModelAndView modelAndView = miControlador.progresoPaciente(pacienteMock, requestMock);
+		ModelAndView modelAndView = miControlador.progresoPaciente(pacienteDTOMock, requestMock);
 
 		assertThat(modelAndView.getViewName() ).isEqualTo("progresoPaciente");
 			

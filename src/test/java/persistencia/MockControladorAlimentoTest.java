@@ -20,12 +20,14 @@ public class MockControladorAlimentoTest extends SpringTest{
 	@Test @Rollback @Transactional
 	public void testQuePruebairAregistrarConsumoAlimento(){
 		
-		ControladorAlimento miControlador=new ControladorAlimento();
-		ServicioAlimentos servicioAlimentosMock=mock(ServicioAlimentos.class);
+		ControladorAlimento miControlador = new ControladorAlimento();
+		ServicioAlimentos servicioAlimentosMock = mock(ServicioAlimentos.class);
 		miControlador.setServicioAlimentos(servicioAlimentosMock);
 		
-		List<Alimento> listadoAlimentos =mock(List.class);
-		List<Alimento> listadoBebidas =mock(List.class);
+		@SuppressWarnings("unchecked")
+		List<Alimento> listadoAlimentos = mock(List.class);
+		@SuppressWarnings("unchecked")
+		List<Alimento> listadoBebidas = mock(List.class);
 		
 		when(servicioAlimentosMock.obtenerListadoDeAlimentos("comida") ).thenReturn(listadoAlimentos);
 		when(servicioAlimentosMock.obtenerListadoDeAlimentos("bebida") ).thenReturn(listadoBebidas);

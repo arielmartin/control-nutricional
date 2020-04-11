@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import modelo.*;
 import springTest.SpringTest;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
+//import static org.assertj.core.api.Assertions.assertThat;
 
 public class PacienteDTOTest extends SpringTest{
 

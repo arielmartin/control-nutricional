@@ -13,13 +13,11 @@
 	</head>
 	<body>
 	
-
-		
 		<header class="header container">
 			<h1 class="logo">Control Nutricional</h1>
            
             <nav>
-                 <ul class="container">
+                 <ul class="">
                     <li><a class="btn" href="home">Inicio</a></li>
                     <c:if test="${ROL=='medico'}" >
                     	<li><a class="btn" href="registrar_usuario">Registrar Paciente</a></li>  
@@ -30,7 +28,7 @@
                     	<li><a class="btn" href="verplan">Ver Plan</a></li>
                     	<li><a class="btn" href="registrarConsumoAlimento">Registrar Comida</a></li>
                     </c:if>
-                    	<li><a class="btn" href="historialDeComidas">Historial Comidas</a></li>
+                    	<!--  <li><a class="btn" href="historialDeComidas">Historial Comidas</a></li> -->
                 </ul>
             </nav>
             
@@ -38,7 +36,7 @@
 		
 		<div class = "main container">
 		
-			<div id="grafico"  class="mainbox col-md-10 col-md-12 col-sm-12 col-lg-offset-2 col-md-offset-1">
+			<div id="grafico"  class="mainbox col-md-8 col-md-offset-2 col-sm-12">
 				<!--  <div class="mainbox">-->
 				<br>
 					<h2 class="center">Tiempo estimado en cumplir objetivo</h2>
