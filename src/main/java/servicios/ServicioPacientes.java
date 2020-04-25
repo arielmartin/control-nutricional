@@ -17,7 +17,7 @@ public interface ServicioPacientes {
 
 	Plan generarPlanSugerido(PacienteDTO pacienteDTO);
 	
-	void savePaciente(Paciente paciente);
+	Long savePaciente(Paciente paciente);
 
 	Paciente obtenerPaciente(Long id);
 	
@@ -28,5 +28,7 @@ public interface ServicioPacientes {
 	public void cargarPacientesIniciales();
 
 	Paciente getPacienteByIdUsuario(Long idUsuario);
+
+	void deletePaciente(Long id);
 	
 }

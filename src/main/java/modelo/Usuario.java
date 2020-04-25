@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 // Clase que modela el concepto de Usuario, la anotacion @Entity le avisa a hibernate que esta clase es persistible
 // el paquete ar.edu.unlam.tallerweb1.modelo esta indicado en el archivo hibernateCOntext.xml para que hibernate
-// busque entities en Ã©l
+// busque entities en él
 @Entity
 public class Usuario {
 
@@ -23,6 +23,8 @@ public class Usuario {
 	private String nombre;
 	private String apellido;
 	private String fechaNacimiento;
+	
+	public Usuario() {}
 	
 	public Long getId() {
 		return id;

@@ -55,7 +55,7 @@
 				</form:select>
 				<br>
 				<form:label path="peso">Peso</form:label>
-				<form:input path="peso" id="peso" type="number" class="form-control" required="required" placeholder="Exprese su peso en kilogramos" /> 
+				<form:input path="peso" id="peso" type="number" step=".01" class="form-control" required="required" placeholder="Exprese su peso en kilogramos,gramos" /> 
 				<br>
 				<button class="btn btn-lg btn-primary btn-block" Type="Submit">Confirmar</button>
 			

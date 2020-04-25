@@ -2,8 +2,9 @@ package controladores;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+
+import java.util.*;
+
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+//import com.google.gson.Gson;
+
 import modelo.Formula;
 import modelo.Paciente;
 import modelo.PacienteDTO;
@@ -23,6 +26,7 @@ import modelo.Usuario;
 import servicios.ServicioLogin;
 import servicios.ServicioPacientes;
 import servicios.ServicioPlan;
+
 
 
 @Controller
@@ -36,6 +40,8 @@ public class ControladorPaciente {
 	
 	@Inject
 	private ServicioLogin servicioLogin;
+	
+	//@Inject private ServicioWebPaciente swp;
 	
 	
 	@RequestMapping(path = "/paciente", method = RequestMethod.GET)

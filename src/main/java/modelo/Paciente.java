@@ -19,17 +19,20 @@ public class Paciente {
 	private Long id;
 	@Column(unique = true)
 	private Long idUsuario;
-	private String nombre;
-	private Double peso;
-	private Double altura;
-	private String sexo;
-	private int edad;
-	private int ejercicio;
-	private String fecha_inicio;
-	private Long medicoAsociado_id;
-	private Long planAsociado_id;
-	private String fnac;
+	private String nombre="";
+	private Double peso=(double) 0;
+	private Double altura=(double) 0;
+	private String sexo="";
+	private int edad=0;
+	private int ejercicio=0;
+	private String fecha_inicio="";
+	private Long medicoAsociado_id=(long) 0;
+	private Long planAsociado_id=(long) 0;
+	private String fnac="";
 		
+	
+	public Paciente() {}
+	
 	public Long getMedicoAsociado_id() {
 		return medicoAsociado_id;
 	}
@@ -38,9 +41,6 @@ public class Paciente {
 		this.medicoAsociado_id = medicoAsociado_id;
 	}
 
-	public Paciente() {
-	}
-	
 	public Paciente(Double peso, Double altura) {
 		this.peso = peso;
 		this.altura = altura;

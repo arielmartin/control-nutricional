@@ -7,9 +7,11 @@ import modelo.*;
 public interface PacienteDao {
 	
 //	este metodo retorna el objeto paciente por medio de un Long id
-	Paciente getPacienteById(Long id);
+	public Paciente getPacienteById(Long id);
+	
 //	este metodo guarda en BD el objeto Paciente enviado por parametro y retorna su id
 	Long savePaciente (Paciente paciente);
+	
 //	este metodo retorna el peso de un paciente desde la BD
 	Double getPesoPaciente(Long id);
 	
@@ -22,4 +24,7 @@ public interface PacienteDao {
 	public void cargarPacientesIniciales();
 	
 	Paciente getPacienteByIdUsuario(Long idUsuario);
+
+	public void deletePaciente(Long id);
+
 }

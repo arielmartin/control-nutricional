@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import modelo.Paciente;
 
 
-@Repository("pacienteDao")
+@Repository("PacienteDao")
 public class PacienteDaoImpl implements PacienteDao{
 	
 	@Inject
@@ -29,6 +29,7 @@ public class PacienteDaoImpl implements PacienteDao{
 		return resultado;
 	}
 	
+	
 	@Override
 	public Long savePaciente(Paciente paciente) {
 		Session session = sessionFactory.getCurrentSession();
@@ -36,6 +37,15 @@ public class PacienteDaoImpl implements PacienteDao{
 		
 		return paciente.getId();
 	}
+	
+	
+	@Override
+	public void deletePaciente(Long id) {
+		Session session = sessionFactory.getCurrentSession();
+		Paciente paciente = this.getPacienteById(id);
+		session.delete(paciente);
+	}
+	
 	
 	@Override
 	public Double getPesoPaciente(Long id){
@@ -165,4 +175,7 @@ public class PacienteDaoImpl implements PacienteDao{
 		session.save(pacienteInfo4);
 		session.save(pacienteInfo5);
 	}
+
+
+
 }

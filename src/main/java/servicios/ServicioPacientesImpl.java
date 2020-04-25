@@ -44,8 +44,8 @@ public class ServicioPacientesImpl implements ServicioPacientes {
 	}
 	
 	@Override
-	public void savePaciente(Paciente paciente){
-		pacienteDao.savePaciente(paciente);
+	public Long savePaciente(Paciente paciente){
+		return pacienteDao.savePaciente(paciente);
 	}
 	
 	@Override
@@ -72,4 +72,12 @@ public class ServicioPacientesImpl implements ServicioPacientes {
 	public void cargarPacientesIniciales() {
 		pacienteDao.cargarPacientesIniciales();
 	}
+
+	@Override
+	public void deletePaciente(Long id) {
+		 pacienteDao.deletePaciente(id);
+		
+	}
+
+
 }
