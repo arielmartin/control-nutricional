@@ -26,23 +26,6 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
     
-     <!--Servlet para publicar los ws-rest
-    <servlet>
-        <servlet-name>Api Servlet</servlet-name>
-        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
-        <init-param>
-            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
-            <param-value>true</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>Api Servlet</servlet-name>
-        <url-pattern>/api/*</url-pattern>
-    </servlet-mapping>-->
-    
-
     <!--Se indica el context listener, el mismo hace referencia el archivo de configuracion principal de spring: applicationContext.xml-->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

@@ -22,7 +22,7 @@ public class Plan {
 	private boolean aptoCeliaco;
 	private int caloriasDiarias;
 	//private List<ComidasPorDia> listaComidasPorDia; //ManyToOne? OneToMany? Ver esto después
-	@Column(columnDefinition = "LONGTEXT")
+	//@Column(columnDefinition = "LONGTEXT")
 	private String listaComidasPorDia; // Por ahora. Esto despues se va a borrar y reemplazar por el listado de arriba
 	
 	private String desayuno;

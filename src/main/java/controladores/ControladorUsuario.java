@@ -172,11 +172,13 @@ public class ControladorUsuario {
 		servicioLogin.crearUsuario(usuario);
 		
 		//metodo que agrega los Planes
-		List<Plan> planes = servicioPlan.getAllPlanes();
+		List<Plan> planes;
+		planes = servicioPlan.getAllPlanes();
 		
 		if(planes.size() == 0){
 			servicioPacientes.insertarPlanesIniciales();
 		}
+		
 		return new ModelAndView("redirect:/login");
 		
 	}
